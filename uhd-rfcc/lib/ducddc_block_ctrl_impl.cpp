@@ -4,15 +4,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
 
-#include <uhd/rfnoc/ducddc_block_ctrl.hpp>
+#include <rfcc/ducddc_block_ctrl.hpp>
 #include <uhd/utils/log.hpp>
 #include <uhd/convert.hpp>
 #include <uhd/types/ranges.hpp>
-#include <uhdlib/utils/compat_check.hpp>
-#include <uhdlib/utils/math.hpp>
-#include <uhdlib/utils/narrow.hpp>
-#include <uhdlib/usrp/cores/dsp_core_utils.hpp>
-#include <boost/math/special_functions/round.hpp>
 #include <cmath>
 
 using namespace uhd::rfnoc;
@@ -22,13 +17,13 @@ class ducddc_block_ctrl_impl : public ducddc_block_ctrl
 public:
     UHD_RFNOC_BLOCK_CONSTRUCTOR(ducddc_block_ctrl)
         , _fpga_compat(user_reg_read64(RB_REG_COMPAT_NUM))
-        , _num_duc_halfbands(uhd::narrow_cast<size_t>(
+        , _num_duc_halfbands(narrow_cast<size_t>(
                     user_reg_read64(RB_REG_DUC_NUM_HALFBANDS)))
-        , _num_ddc_halfbands(uhd::narrow_cast<size_t>(
+        , _num_ddc_halfbands(narrow_cast<size_t>(
                     user_reg_read64(RB_REG_DDC_NUM_HALFBANDS)))
-        , _cic_max_interp(uhd::narrow_cast<size_t>(
+        , _cic_max_interp(narrow_cast<size_t>(
                     user_reg_read64(RB_REG_CIC_MAX_INTERP)))
-        , _cic_max_decim(uhd::narrow_cast<size_t>(
+        , _cic_max_decim(narrow_cast<size_t>(
                     user_reg_read64(RB_REG_CIC_MAX_DECIM)))
     {
         UHD_LOG_DEBUG(unique_id(),
@@ -37,12 +32,15 @@ public:
             "DDC halfbands, max CIC interpolation " << get_cic_max_interp() <<
             ", and max CIC decimation" << get_cic_max_decim()
         );
-        uhd::assert_fpga_compat(
-            MAJOR_COMP, MINOR_COMP,
-            _fpga_compat,
-            "DUCDDC", "DUCDDC",
-            false /* Let it slide if minors mismatch */
-        );
+
+        // TODO: assert_fpga_compat is currently hidden behind uhdlib
+        //       --> Replace this function or expose to uhd API?
+        //uhd::assert_fpga_compat(
+        //    MAJOR_COMP, MINOR_COMP,
+        //    _fpga_compat,
+        //    "DUCDDC", "DUCDDC",
+        //    false /* Let it slide if minors mismatch */
+        //);
 
         // Argument/prop tree hooks
         for (size_t chan = 0; chan < get_input_ports().size(); chan++) {
@@ -163,6 +161,18 @@ private:
     const size_t _cic_max_interp;
     const size_t _cic_max_decim;
 
+    template <class T>
+    T ceil_log2(T num){
+        // Pulled in from uhdlib/utils/math.hpp
+        return std::ceil(std::log(num)/std::log(T(2)));
+    }
+
+    template <class T, class U>
+    inline constexpr T narrow_cast(U&& u) noexcept
+    {
+        return static_cast<T>(std::forward<U>(u));
+    }
+
     size_t write_interp_word(const size_t interp_rate, const size_t chan)
     {
         size_t interp = interp_rate;
@@ -198,7 +208,7 @@ private:
         const double rate_pow = std::pow(double(interp & 0xff), CIC_N - 1);
         const double CONSTANT_GAIN = 1.0;
         const double scaling_adjustment =
-            std::pow(2, uhd::math::ceil_log2(rate_pow))/(CONSTANT_GAIN*rate_pow);
+            std::pow(2, ceil_log2(rate_pow))/(CONSTANT_GAIN*rate_pow);
         UHD_LOGGER_DEBUG(unique_id()) << "DUC Amplitude Scale: " << scaling_adjustment;
         set_arg<double>("duc_scale", scaling_adjustment, chan);
 
@@ -240,7 +250,7 @@ private:
         const double rate_pow = std::pow(double(decim & 0xff), 4);
         static const double DDS_GAIN = 2.0;
         const double scaling_adjustment =
-            std::pow(2, uhd::math::ceil_log2(rate_pow))/(DDS_GAIN*rate_pow);
+            std::pow(2, ceil_log2(rate_pow))/(DDS_GAIN*rate_pow);
         UHD_LOGGER_DEBUG(unique_id()) << "DDC Amplitude Scale: " << scaling_adjustment;
         set_arg<double>("ddc_scale", scaling_adjustment, chan);
 
