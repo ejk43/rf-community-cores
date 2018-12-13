@@ -7,10 +7,7 @@
 <cat>
 	<name>[Core]</name> <!-- Blank for Root Name -->
 	<cat>
-		<name>RF-CC</name>
-		<cat>
-			<name>RFNoC</name>
-			<block>rfcc_rfnoc_ducddc</block>
-		</cat>
+		<name>RF Community Cores</name>
+		<block>rfcc_rfnoc_ducddc</block>
 	</cat>
 </cat>
