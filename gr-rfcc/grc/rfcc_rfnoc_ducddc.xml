@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <block>
   <name>RFNoC: DUCDDC</name>
-  <key>uhd_rfnoc_streamer_ducddc</key>
+  <key>rfcc_rfnoc_ducddc</key>
   <import>import ettus</import>
   <make>ettus.rfnoc_generic(
     self.device3,

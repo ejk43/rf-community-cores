@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##Block Tree for uhd blocks.
+###################################################
+ -->
+<cat>
+	<name>[Core]</name> <!-- Blank for Root Name -->
+	<cat>
+		<name>RF-CC</name>
+		<cat>
+			<name>RFNoC</name>
+			<block>rfcc_rfnoc_ducddc</block>
+		</cat>
+	</cat>
+</cat>
