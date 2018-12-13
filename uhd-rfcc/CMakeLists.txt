@@ -104,8 +104,13 @@ SET(PKG_DATA_DIR share/uhd)
 ########################################################################
 # Local Include Dir
 ########################################################################
-INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/include)
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/lib
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_BINARY_DIR}/lib
+    ${CMAKE_BINARY_DIR}/include
+    ${Boost_INCLUDE_DIRS}
+)
 
 ADD_SUBDIRECTORY(include/rfcc)
 ADD_SUBDIRECTORY(rfnoc-blocks)
