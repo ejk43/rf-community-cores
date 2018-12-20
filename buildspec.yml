@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - git clone --depth 1 https://github.com/EttusResearch/fpga.git ../uhd-fpga
+  build:
+    commands:
+      - echo Build started on `date`
+      - ls .
+      - ls ..
+      - echo "hello world!" > hi.txt
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - hi.txt
