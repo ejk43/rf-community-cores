@@ -2,6 +2,7 @@ stages:
   - fpga
 
 job-fpga-test:
+  image: registry.gitlab.com/ejk/rf-community-cores/ubuntu:16.04
   stage: fpga
   before_script:
     - git clone --depth 1 https://github.com/EttusResearch/fpga.git ../uhd-fpga
