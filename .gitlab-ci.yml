@@ -1,0 +1,17 @@
+stages:
+  - fpga
+
+job-fpga-test:
+  stage: fpga
+  before_script:
+    - git clone --depth 1 https://github.com/EttusResearch/fpga.git ../uhd-fpga
+    - ls -la
+    - ls -la ../
+  script:
+    - cd fpga-rfnoc/testbenches
+    - ls -la
+    - source /opt/Xilinx/Vivado/2017.4/settings64.sh
+  only:
+    - master
+    - merge_requests
+    - web
