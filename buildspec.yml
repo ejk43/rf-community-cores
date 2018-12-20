@@ -15,6 +15,7 @@ phases:
       - echo "hello world!" > hi.txt
   post_build:
     commands:
+      - cat hi.txt
       - echo Build completed on `date`
 artifacts:
   files:
