@@ -1,0 +1,62 @@
+# ----- REMOVE LINES ABOVE HERE --------------------------
+#
+# This license is valid from Mon Aug 01 16:56:55 UTC 2016.
+#
+#
+# This is a permanent license generated on Mon Aug 01 16:56:55 UTC 2016
+INCREMENT ISE_WebPACK xilinxd 2017.08 permanent uncounted \
+9C19ED5ABE85 \
+VENDOR_STRING=ejk,ISE_WebPACK,software,permanent,_211220196_0_0_812 \
+HOSTID=ANY ISSUER="Xilinx Inc" START=01-Aug-2016 TS_OK
+#
+# This is a permanent license generated on Mon Aug 01 16:56:55 UTC 2016
+INCREMENT SDK xilinxd 2017.08 permanent uncounted 994F85E0BA47 \
+VENDOR_STRING=ejk,SDK,software,permanent,_211220196_0_0_922 \
+HOSTID=ANY ISSUER="Xilinx Inc" START=01-Aug-2016 TS_OK
+#
+# This is a permanent license generated on Mon Aug 01 16:56:55 UTC 2016
+INCREMENT Analyzer xilinxd 2017.08 permanent uncounted 8DC7AEC80761 \
+VENDOR_STRING=ejk,Analyzer,software,permanent,_211220196_0_0_361 \
+HOSTID=ANY ISSUER="Xilinx Inc" START=01-Aug-2016 TS_OK
+#
+# This is a permanent license generated on Mon Aug 01 16:56:55 UTC 2016
+INCREMENT HLS xilinxd 2017.08 permanent uncounted A333D0A406C2 \
+VENDOR_STRING=ejk,HLS,software,permanent,_211220196_0_0_267 \
+HOSTID=ANY ISSUER="Xilinx Inc" START=01-Aug-2016 TS_OK
+#
+# This is a permanent license generated on Mon Aug 01 16:56:55 UTC 2016
+INCREMENT V_WebPACK xilinxd 2017.08 permanent uncounted 1C96E4E6C4B6 \
+VENDOR_STRING=ejk,V_WebPACK,software,permanent,_211220196_0_0_440 \
+HOSTID=ANY ISSUER="Xilinx Inc" START=01-Aug-2016 TS_OK
+#
+#
+# ----------------------------------------------------------------------
+#  The following PACKAGE definition is a REQUIRED part of this license:
+#
+PACKAGE PetaLinux_NoSuport_Eval xilinxd 2017.08 B59FF7AA2027 \
+COMPONENTS="petalinux_arch_microblaze petalinux_arch_ppc \
+petalinux_arch_zynq" OPTIONS=SUITE
+#
+# ------------------------------------------------------------------------------
+#
+#
+# ----------------------------------------------------------------------
+#  The following PACKAGE definition is a REQUIRED part of this license:
+#
+PACKAGE Vivado_System_Edition xilinxd 2017.08 E109CF02E90A \
+COMPONENTS="SDK SysGen Simulation Implementation Analyzer HLS \
+Synthesis VIVADO_HLS" OPTIONS=SUITE
+#
+# ------------------------------------------------------------------------------
+#
+#
+# ----------------------------------------------------------------------
+#  The following PACKAGE definition is a REQUIRED part of this license:
+#
+PACKAGE ISE_WebPACK xilinxd 2017.08 F71375A01F3D COMPONENTS="SDK \
+ChipScopePro_SIOTK ChipscopePro WebPACK XC7Z010 XC7Z030 HLS \
+xps_tdp XC7Z020 PlanAhead" OPTIONS=SUITE
+#
+# ------------------------------------------------------------------------------
+#
+# ----- REMOVE LINES BELOW HERE --------------------------
