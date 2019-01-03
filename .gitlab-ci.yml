@@ -1,17 +1,24 @@
 stages:
+  - build
   - fpga
 
-job-fpga-test:
-  image: registry.gitlab.com/ejk/rf-community-cores/ubuntu:16.04
-  stage: fpga
-  before_script:
-    - git clone --depth 1 https://github.com/EttusResearch/fpga.git ../uhd-fpga
-    - ls -la
-    - ls -la ../
+job-build-uhd-v3.13.0.1:
+  stage: build
+  image: registry.gitlab.com/ejk/rf-community-cores/uhd-rfnoc:v3.13.0.1
   script:
-    - cd fpga-rfnoc/testbenches
-    - ls -la
-    - source /opt/Xilinx/Vivado/2017.4/settings64.sh
+    - mkdir build
+    - cd build
+    - cmake ../ -DENABLE_UHD=1 -DENABLE_GNURADIO=0
+    - make -j10
+  only:
+    - master
+    - merge_requests
+    - web
+
+job-fpga-test:
+  stage: fpga
+  script:
+    - echo Hello World
   only:
     - master
     - merge_requests
