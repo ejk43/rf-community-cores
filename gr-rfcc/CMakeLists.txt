@@ -138,10 +138,10 @@ endif(DOXYGEN_FOUND)
 # Setup the include and linker paths
 ########################################################################
 include_directories(
-    # ${CMAKE_SOURCE_DIR}/lib
-    # ${CMAKE_SOURCE_DIR}/include
-    # ${CMAKE_BINARY_DIR}/lib
-    # ${CMAKE_BINARY_DIR}/include
+    # ${CMAKE_SOURCE_DIR}/gr-rfcc/lib
+    # ${CMAKE_SOURCE_DIR}/gr-rfcc/include
+    # ${CMAKE_BINARY_DIR}/gr-rfcc/lib
+    # ${CMAKE_BINARY_DIR}/gr-rfcc/include
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
     ${GNURADIO_ALL_INCLUDE_DIRS}

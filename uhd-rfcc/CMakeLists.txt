@@ -105,10 +105,10 @@ SET(PKG_DATA_DIR share/uhd)
 # Local Include Dir
 ########################################################################
 include_directories(
-    ${CMAKE_SOURCE_DIR}/lib
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_BINARY_DIR}/lib
-    ${CMAKE_BINARY_DIR}/include
+    ${CMAKE_SOURCE_DIR}/uhd-rfcc/lib
+    ${CMAKE_SOURCE_DIR}/uhd-rfcc/include
+    ${CMAKE_BINARY_DIR}/uhd-rfcc/lib
+    ${CMAKE_BINARY_DIR}/uhd-rfcc/include
     ${Boost_INCLUDE_DIRS}
 )
 
