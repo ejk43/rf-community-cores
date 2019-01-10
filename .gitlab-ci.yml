@@ -1,19 +1,49 @@
 stages:
-  - build
+  - uhd
+  - gnuradio
   - fpga
 
-job-build-uhd-v3.13.0.1:
-  stage: build
-  image: registry.gitlab.com/ejk/rf-community-cores/uhd-rfnoc:v3.13.0.1
-  script:
-    - mkdir build
-    - cd build
-    - cmake ../ -DENABLE_UHD=1 -DENABLE_GNURADIO=0
-    - make -j10
-  only:
+.conditionals: &conditionals
+  refs:
     - master
     - merge_requests
     - web
+
+.uhd-build: &uhd-build
+  - mkdir build
+  - cd build
+  - cmake ../ -DENABLE_UHD=1 -DENABLE_GNURADIO=0
+  - make -j10
+
+.gnuradio-build: &gnuradio-build
+  - mkdir build
+  - cd build
+  - cmake ../ -DENABLE_UHD=1 -DENABLE_GNURADIO=1
+  - make -j10
+
+job-build-uhd-master:
+  stage: uhd
+  image: registry.gitlab.com/ejk/rf-community-docker/uhd:master-rfnoc-all
+  script: *uhd-build
+  only: *conditionals
+
+job-build-uhd-3.13:
+  stage: uhd
+  image: registry.gitlab.com/ejk/rf-community-docker/uhd:UHD-3.13-rfnoc-all
+  script: *uhd-build
+  only: *conditionals
+
+job-build-gnuradio-maint-uhd-master:
+  stage: gnuradio
+  image: registry.gitlab.com/ejk/rf-community-docker/gnuradio:maint-3.7-UHD-master-rfnoc
+  script: *gnuradio-build
+  only: *conditionals
+
+job-build-gnuradio-maint-uhd-3.13:
+  stage: gnuradio
+  image: registry.gitlab.com/ejk/rf-community-docker/gnuradio:maint-3.7-UHD-3.13-rfnoc
+  script: *gnuradio-build
+  only: *conditionals
 
 job-fpga-test:
   stage: fpga
